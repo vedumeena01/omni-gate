@@ -16,9 +16,9 @@
 - [x] Task 3.3: Resilient Router & Fallback Cascade (`src/resiliency/router.py`) with automatic retry and provider switching.
 
 ### Phase 4: Pluggable Guardrails Engine
-- [ ] Task 4.1: Guardrail pipeline interface (`src/guardrails/base.py`).
-- [ ] Task 4.2: PII Redactor & Sanitizer (`src/guardrails/pii.py`) for emails, credit cards, phones, and SSNs.
-- [ ] Task 4.3: Prompt Injection & Jailbreak Detector (`src/guardrails/injection.py`) with heuristic analysis and token entropy.
+- [x] Task 4.1: Guardrail pipeline interface (`src/guardrails/base.py`).
+- [x] Task 4.2: PII Redactor & Sanitizer (`src/guardrails/pii.py`) for emails, credit cards, phones, and SSNs.
+- [x] Task 4.3: Prompt Injection & Jailbreak Detector (`src/guardrails/injection.py`) with heuristic analysis and token entropy.
 
 ### Phase 5: Two-Tier Caching System
 - [ ] Task 5.1: Abstract cache interface & Tier-1 Exact Match SHA-256 Cache (`src/cache/exact.py`).
