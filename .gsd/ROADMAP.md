@@ -11,9 +11,9 @@
 - [x] Task 2.3: Upstream HTTP Provider (`src/providers/http_provider.py`) for real OpenAI/Anthropic/Gemini compatible endpoints with HTTPX.
 
 ### Phase 3: Reliability & Resiliency Layer
-- [ ] Task 3.1: Token bucket rate limiter (`src/resiliency/rate_limiter.py`).
-- [ ] Task 3.2: Circuit Breaker implementation (`src/resiliency/circuit_breaker.py`) with Closed, Open, Half-Open states.
-- [ ] Task 3.3: Resilient Router & Fallback Cascade (`src/resiliency/router.py`) with automatic retry and provider switching.
+- [x] Task 3.1: Token bucket rate limiter (`src/resiliency/rate_limiter.py`).
+- [x] Task 3.2: Circuit Breaker implementation (`src/resiliency/circuit_breaker.py`) with Closed, Open, Half-Open states.
+- [x] Task 3.3: Resilient Router & Fallback Cascade (`src/resiliency/router.py`) with automatic retry and provider switching.
 
 ### Phase 4: Pluggable Guardrails Engine
 - [ ] Task 4.1: Guardrail pipeline interface (`src/guardrails/base.py`).
