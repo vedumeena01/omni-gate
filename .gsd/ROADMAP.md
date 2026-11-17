@@ -25,8 +25,8 @@
 - [x] Task 5.2: Tier-2 Semantic Cache (`src/cache/semantic.py`) with vector similarity calculation and thresholding.
 
 ### Phase 6: Telemetry, Observability & FastAPI Integration
-- [ ] Task 6.1: Structured telemetry & token/cost counter (`src/telemetry/metrics.py`).
-- [ ] Task 6.2: FastAPI ASGI application (`src/main.py`) with `/v1/chat/completions`, `/health`, and `/metrics` endpoints.
+- [x] Task 6.1: Structured telemetry & token/cost counter (`src/telemetry/metrics.py`).
+- [x] Task 6.2: FastAPI ASGI application (`src/main.py`) with `/v1/chat/completions`, `/health`, and `/metrics` endpoints.
 
 ### Phase 7: Evaluation Suite & Benchmarking Harness
 - [ ] Task 7.1: Eval benchmark suite (`eval/run_benchmarks.py`) testing cache hit latency, guardrail accuracy, and fallback resilience.
