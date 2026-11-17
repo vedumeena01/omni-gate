@@ -21,8 +21,8 @@
 - [x] Task 4.3: Prompt Injection & Jailbreak Detector (`src/guardrails/injection.py`) with heuristic analysis and token entropy.
 
 ### Phase 5: Two-Tier Caching System
-- [ ] Task 5.1: Abstract cache interface & Tier-1 Exact Match SHA-256 Cache (`src/cache/exact.py`).
-- [ ] Task 5.2: Tier-2 Semantic Cache (`src/cache/semantic.py`) with vector similarity calculation and thresholding.
+- [x] Task 5.1: Abstract cache interface & Tier-1 Exact Match SHA-256 Cache (`src/cache/exact.py`).
+- [x] Task 5.2: Tier-2 Semantic Cache (`src/cache/semantic.py`) with vector similarity calculation and thresholding.
 
 ### Phase 6: Telemetry, Observability & FastAPI Integration
 - [ ] Task 6.1: Structured telemetry & token/cost counter (`src/telemetry/metrics.py`).
