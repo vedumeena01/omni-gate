@@ -5,6 +5,7 @@ import json
 import time
 from typing import AsyncIterator, Optional
 from fastapi import FastAPI, Header, HTTPException, Request, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from src.cache.exact import ExactMatchCache
@@ -98,6 +99,14 @@ def create_app(cfg: Optional[Settings] = None) -> FastAPI:
         lifespan=lifespan,
     )
     app.state.ctx = ctx
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     @app.get("/health", status_code=status.HTTP_200_OK)
     async def health():
@@ -276,3 +285,15 @@ def create_app(cfg: Optional[Settings] = None) -> FastAPI:
 
 
 app = create_app()
+
+
+def run_server() -> None:
+    """CLI Entrypoint to run OmniGate using Uvicorn."""
+    import uvicorn
+
+    uvicorn.run(
+        "src.main:app",
+        host=settings.host,
+        port=settings.port,
+        reload=settings.debug,
+    )

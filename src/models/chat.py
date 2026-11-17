@@ -20,7 +20,7 @@ class ChatCompletionRequest(BaseModel):
     """Request payload for /v1/chat/completions."""
 
     model: str
-    messages: List[ChatMessage]
+    messages: List[ChatMessage] = Field(min_length=1, description="List of messages comprising the conversation.")
     temperature: Optional[float] = Field(default=1.0, ge=0.0, le=2.0)
     top_p: Optional[float] = Field(default=1.0, ge=0.0, le=1.0)
     n: Optional[int] = Field(default=1, ge=1)
