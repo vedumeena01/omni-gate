@@ -99,6 +99,56 @@ async def test_http_provider_generate():
 
 @pytest.mark.asyncio
 @respx.mock
+async def test_http_provider_stream():
+    upstream_url = "https://mock.openai.com/v1"
+    stream_content = (
+        'data: {"id":"chatcmpl-1","object":"chat.completion.chunk","created":123,"model":"gpt-4o","choices":[{"index":0,"delta":{"content":"Hello"},"finish_reason":null}]}\n\n'
+        'data: {"id":"chatcmpl-1","object":"chat.completion.chunk","created":123,"model":"gpt-4o","choices":[{"index":0,"delta":{"content":" world"},"finish_reason":"stop"}]}\n\n'
+        'data: [DONE]\n\n'
+    )
+    respx.post(f"{upstream_url}/chat/completions").respond(
+        status_code=200,
+        text=stream_content,
+        headers={"Content-Type": "text/event-stream"},
+    )
+
+    async with httpx.AsyncClient() as client:
+        provider = HttpProvider(
+            provider_name="openai-primary",
+            base_url=upstream_url,
+            client=client,
+        )
+        req = ChatCompletionRequest(
+            model="gpt-4o",
+            messages=[ChatMessage(role="user", content="Test stream")],
+            stream=True,
+        )
+        chunks = []
+        async for chunk in provider.generate_stream(req):
+            chunks.append(chunk)
+
+        assert len(chunks) == 2
+        assert chunks[0].choices[0].delta.content == "Hello"
+        assert chunks[1].choices[0].delta.content == " world"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_http_provider_health():
+    upstream_url = "https://mock.openai.com/v1"
+    respx.get(f"{upstream_url}/models").respond(status_code=200, json={"data": []})
+
+    async with httpx.AsyncClient() as client:
+        provider = HttpProvider(
+            provider_name="openai-primary",
+            base_url=upstream_url,
+            client=client,
+        )
+        assert await provider.is_healthy() is True
+
+
+@pytest.mark.asyncio
+@respx.mock
 async def test_http_provider_error_handling():
     upstream_url = "https://mock.openai.com/v1"
     respx.post(f"{upstream_url}/chat/completions").respond(

@@ -29,8 +29,8 @@
 - [x] Task 6.2: FastAPI ASGI application (`src/main.py`) with `/v1/chat/completions`, `/health`, and `/metrics` endpoints.
 
 ### Phase 7: Evaluation Suite & Benchmarking Harness
-- [ ] Task 7.1: Eval benchmark suite (`eval/run_benchmarks.py`) testing cache hit latency, guardrail accuracy, and fallback resilience.
-- [ ] Task 7.2: Comprehensive test suite (`tests/`) covering all layers with > 85% coverage.
+- [x] Task 7.1: Eval benchmark suite (`eval/run_benchmarks.py`) testing cache hit latency, guardrail accuracy, and fallback resilience.
+- [x] Task 7.2: Comprehensive test suite (`tests/`) covering all layers with > 85% coverage (achieved 91%).
 
 ### Phase 8: GitHub Readiness & Documentation (Alignerr Submission)
 - [ ] Task 8.1: Dockerfile & docker-compose for containerized execution.
