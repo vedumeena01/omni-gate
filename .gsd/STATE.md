@@ -1,20 +1,19 @@
 # OmniGate: Session Memory & State (.gsd/STATE.md)
 
 ### Current Session Status
-- **Current Phase:** Phase 2: Gateway Core & Provider Engine
-- **Active Task:** Task 2.1: Abstract Base Provider interface (`src/providers/base.py`)
+- **Current Phase:** Phase 3: Reliability & Resiliency Layer
+- **Active Task:** Task 3.1: Token bucket rate limiter (`src/resiliency/rate_limiter.py`)
 - **Target Deliverable:** Production-grade AI Gateway (`OmniGate`) for Alignerr "Build your project" program ($60–$100/hr).
 - **Environment:** Windows, Python 3.14 (`.venv`), Git enabled.
 
 ### Recent Accomplishments
 - [x] Initialized Git repository on `main` branch.
 - [x] Configured Python virtual environment (`.venv`) with FastAPI, Pydantic v2, Pytest, Respx, Ruff.
-- [x] Task 1.1 complete: Project directory structure & dependencies installed.
-- [x] Task 1.2 complete: Pydantic Settings configuration (`src/core/config.py`) with environment variable overrides.
-- [x] Task 1.3 complete: OpenAI-compatible Chat Completion data models (`src/models/chat.py`) with deterministic SHA-256 cache key generation.
-- [x] All 6 unit tests passing cleanly.
+- [x] Phase 1 complete: Project scaffolding, Pydantic configuration, OpenAI-compatible chat models.
+- [x] Phase 2 complete: Base Provider abstraction, MockProvider with deterministic replies & streaming, and HttpProvider with Respx-tested upstream error handling.
+- [x] 11/11 unit tests passing with 100% test runner success.
 
 ### Immediate Next Steps
-1. Task 2.1: Implement Base Provider abstraction (`src/providers/base.py`) supporting both `generate()` and `generate_stream()`.
-2. Task 2.2: Implement `MockProvider` (`src/providers/mock.py`) for offline, deterministic, sub-millisecond testing.
-3. Task 2.3: Implement `HttpProvider` (`src/providers/http_provider.py`) for real OpenAI/upstream API proxying.
+1. Task 3.1: Implement Token Bucket Rate Limiter (`src/resiliency/rate_limiter.py`) for tenant and key throttling.
+2. Task 3.2: Implement Circuit Breaker (`src/resiliency/circuit_breaker.py`) with state transitions (CLOSED, OPEN, HALF-OPEN).
+3. Task 3.3: Implement Resilient Router (`src/resiliency/router.py`) with automatic retries and fallback cascading.

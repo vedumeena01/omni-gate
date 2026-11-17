@@ -6,9 +6,9 @@
 - [x] Task 1.3: Data models & schemas (`src/models/chat.py`) matching OpenAI Chat Completion requests/responses.
 
 ### Phase 2: Gateway Core & Provider Engine
-- [ ] Task 2.1: Abstract Base Provider interface (`src/providers/base.py`) supporting non-streaming & streaming responses.
-- [ ] Task 2.2: Mock Provider for high-speed offline testing and development (`src/providers/mock.py`).
-- [ ] Task 2.3: Upstream HTTP Provider (`src/providers/http_provider.py`) for real OpenAI/Anthropic/Gemini compatible endpoints with HTTPX.
+- [x] Task 2.1: Abstract Base Provider interface (`src/providers/base.py`) supporting non-streaming & streaming responses.
+- [x] Task 2.2: Mock Provider for high-speed offline testing and development (`src/providers/mock.py`).
+- [x] Task 2.3: Upstream HTTP Provider (`src/providers/http_provider.py`) for real OpenAI/Anthropic/Gemini compatible endpoints with HTTPX.
 
 ### Phase 3: Reliability & Resiliency Layer
 - [ ] Task 3.1: Token bucket rate limiter (`src/resiliency/rate_limiter.py`).
