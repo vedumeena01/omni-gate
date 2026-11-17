@@ -51,10 +51,11 @@ class MetricsTracker:
             if success:
                 self.successful_requests += 1
 
-            # Latency sampling
-            if len(self._latencies_ms) >= self.max_latency_samples:
-                self._latencies_ms.pop(0)
-            self._latencies_ms.append(latency_ms)
+            # Latency sampling (only record genuine measured latencies > 0)
+            if latency_ms > 0.0:
+                if len(self._latencies_ms) >= self.max_latency_samples:
+                    self._latencies_ms.pop(0)
+                self._latencies_ms.append(latency_ms)
 
             # Caching & Tokens
             if cache_type == "exact":

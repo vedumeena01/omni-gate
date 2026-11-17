@@ -62,10 +62,17 @@ class LocalFeatureEmbedder:
 
 
 class SemanticCacheEntry:
-    """Stores query prompt, its embedding vector, and corresponding response."""
+    """Stores query prompt, its embedding vector, target model, and corresponding response."""
 
-    def __init__(self, prompt: str, vector: List[float], response: ChatCompletionResponse):
+    def __init__(
+        self,
+        prompt: str,
+        model: str,
+        vector: List[float],
+        response: ChatCompletionResponse,
+    ):
         self.prompt = prompt
+        self.model = model
         self.vector = vector
         self.response = response
 
@@ -102,6 +109,8 @@ class SemanticCache:
             highest_score = 0.0
 
             for entry in self._entries:
+                if entry.model != request.model:
+                    continue
                 score = self.embedder.cosine_similarity(query_vec, entry.vector)
                 if score > highest_score:
                     highest_score = score
@@ -131,7 +140,12 @@ class SemanticCache:
                 self._entries.pop(0)  # Simple FIFO eviction
 
             self._entries.append(
-                SemanticCacheEntry(prompt=prompt, vector=vector, response=response)
+                SemanticCacheEntry(
+                    prompt=prompt,
+                    model=request.model,
+                    vector=vector,
+                    response=response,
+                )
             )
 
     async def clear(self) -> None:

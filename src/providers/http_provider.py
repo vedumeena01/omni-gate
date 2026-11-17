@@ -38,12 +38,18 @@ class HttpProvider(BaseProvider):
         self._client = client
 
     def _get_client(self) -> httpx.AsyncClient:
+        if self._client is None:
+            headers = {"Content-Type": "application/json"}
+            if self.api_key:
+                headers["Authorization"] = f"Bearer {self.api_key}"
+            self._client = httpx.AsyncClient(headers=headers, timeout=self.timeout)
+        return self._client
+
+    async def aclose(self) -> None:
+        """Close internal HTTP connection pool."""
         if self._client is not None:
-            return self._client
-        headers = {"Content-Type": "application/json"}
-        if self.api_key:
-            headers["Authorization"] = f"Bearer {self.api_key}"
-        return httpx.AsyncClient(headers=headers, timeout=self.timeout)
+            await self._client.aclose()
+            self._client = None
 
     async def generate(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         """Forward chat completion request to upstream endpoint."""

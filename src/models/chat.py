@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 class ChatMessage(BaseModel):
     """A single chat message in a conversation."""
 
-    role: Literal["system", "user", "assistant", "tool", "function"]
+    role: Literal["system", "developer", "user", "assistant", "tool", "function"]
     content: str
     name: Optional[str] = None
 
@@ -39,11 +39,13 @@ class ChatCompletionRequest(BaseModel):
 
     def get_exact_cache_key(self) -> str:
         """Compute deterministic SHA-256 fingerprint for exact match caching."""
+        temp_val = 1.0 if self.temperature is None else self.temperature
+        topp_val = 1.0 if self.top_p is None else self.top_p
         normalized = {
             "model": self.model,
             "messages": [{"role": m.role, "content": m.content} for m in self.messages],
-            "temperature": round(self.temperature or 1.0, 3),
-            "top_p": round(self.top_p or 1.0, 3),
+            "temperature": round(temp_val, 3),
+            "top_p": round(topp_val, 3),
             "max_tokens": self.max_tokens,
             "stop": self.stop,
         }

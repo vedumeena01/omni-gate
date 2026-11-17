@@ -154,7 +154,7 @@ def create_app(cfg: Optional[Settings] = None) -> FastAPI:
                 )
 
         # 2. Rate Limiting Check
-        client_key = authorization or req.client.host if req.client else "anonymous"
+        client_key = authorization or (req.client.host if req.client else "anonymous")
         if active_config.rate_limit_enabled:
             allowed, retry_after = await ctx.rate_limiter.check_rate_limit(client_key)
             if not allowed:
@@ -233,11 +233,24 @@ def create_app(cfg: Optional[Settings] = None) -> FastAPI:
             if payload.stream:
                 # Streaming SSE flow
                 async def sse_event_stream() -> AsyncIterator[str]:
+                    stream_tokens = 0
                     try:
                         async for chunk in ctx.router.execute_stream(payload):
+                            for choice in chunk.choices:
+                                if choice.delta.content:
+                                    stream_tokens += len(choice.delta.content.split())
                             yield f"data: {json.dumps(chunk.model_dump(exclude_none=True))}\n\n"
                         yield "data: [DONE]\n\n"
+                        elapsed_ms = (time.perf_counter() - start_time) * 1000
+                        await ctx.metrics.record_request(
+                            success=True,
+                            latency_ms=elapsed_ms,
+                            cache_type="none",
+                            prompt_tokens=max(1, len(payload.get_last_user_prompt().split())),
+                            completion_tokens=max(1, stream_tokens),
+                        )
                     except Exception as err:
+                        await ctx.metrics.record_request(success=False)
                         yield f"data: {json.dumps({'error': str(err)})}\n\n"
 
                 return StreamingResponse(
