@@ -1,0 +1,1 @@
+"""OmniGate automated test suite."""
