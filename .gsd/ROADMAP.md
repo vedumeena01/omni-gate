@@ -1,9 +1,9 @@
 # OmniGate: Engineering Roadmap (.gsd/ROADMAP.md)
 
 ### Phase 1: Foundation & Project Scaffolding
-- [ ] Task 1.1: Project structure, `.gitignore`, `pyproject.toml`, dependency setup, and virtualenv activation verification.
-- [ ] Task 1.2: Core configuration & environment variables (`src/core/config.py`) with Pydantic Settings.
-- [ ] Task 1.3: Data models & schemas (`src/models/chat.py`) matching OpenAI Chat Completion requests/responses.
+- [x] Task 1.1: Project structure, `.gitignore`, `pyproject.toml`, dependency setup, and virtualenv activation verification.
+- [x] Task 1.2: Core configuration & environment variables (`src/core/config.py`) with Pydantic Settings.
+- [x] Task 1.3: Data models & schemas (`src/models/chat.py`) matching OpenAI Chat Completion requests/responses.
 
 ### Phase 2: Gateway Core & Provider Engine
 - [ ] Task 2.1: Abstract Base Provider interface (`src/providers/base.py`) supporting non-streaming & streaming responses.
