@@ -4,7 +4,7 @@ import asyncio
 import hashlib
 import math
 import re
-from typing import Dict, List, Optional, Set, Tuple
+from typing import List, Optional, Set, Tuple
 from src.models.chat import ChatCompletionRequest, ChatCompletionResponse
 
 STOPWORDS: Set[str] = {

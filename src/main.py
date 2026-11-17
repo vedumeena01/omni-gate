@@ -1,11 +1,10 @@
 """OmniGate: Production AI Gateway FastAPI application."""
 
-import asyncio
 from contextlib import asynccontextmanager
 import json
 import time
-from typing import Any, AsyncIterator, Dict, Optional
-from fastapi import FastAPI, Header, HTTPException, Request, Response, status
+from typing import AsyncIterator, Optional
+from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from src.cache.exact import ExactMatchCache
@@ -18,13 +17,10 @@ from src.guardrails.base import (
 from src.guardrails.injection import PromptInjectionDetector
 from src.guardrails.pii import PIISanitizer
 from src.models.chat import (
-    ChatCompletionChunk,
     ChatCompletionRequest,
-    ChatCompletionResponse,
 )
 from src.providers.http_provider import HttpProvider
 from src.providers.mock import MockProvider
-from src.resiliency.circuit_breaker import CircuitBreakerOpenException
 from src.resiliency.rate_limiter import RateLimiter
 from src.resiliency.router import (
     AllProvidersFailedException,

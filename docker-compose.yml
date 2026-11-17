@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  omni-gate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omni-gate
+    ports:
+      - "8000:8000"
+    environment:
+      - OMNIGATE_APP_ENV=production
+      - OMNIGATE_PORT=8000
+      - OMNIGATE_CACHE_ENABLED=true
+      - OMNIGATE_SEMANTIC_CACHE_ENABLED=true
+      - OMNIGATE_GUARDRAILS_ENABLED=true
+      - OMNIGATE_RATE_LIMIT_ENABLED=true
+      - OMNIGATE_DEFAULT_REQUESTS_PER_MINUTE=120
+    restart: unless-stopped

@@ -3,7 +3,6 @@
 import asyncio
 from enum import Enum
 import time
-from typing import Optional
 
 
 class CircuitState(str, Enum):

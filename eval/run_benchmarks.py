@@ -160,7 +160,7 @@ async def run_throughput_benchmark(concurrency: int = 50):
 
         async def worker():
             t0 = time.perf_counter()
-            resp = await client.post(
+            await client.post(
                 "/v1/chat/completions",
                 json={
                     "model": "mock-gpt-4o",
